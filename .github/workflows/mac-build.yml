@@ -3,7 +3,7 @@ name: Build macOS App
 on:
   push:
     branches: [ gui-version ]
-  workflow_dispatch:  # allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 jobs:
   build-macos:
@@ -19,12 +19,11 @@ jobs:
 
       - name: Install PyInstaller
         run: |
-          python -m pip install --upgrade pip
           pip install pyinstaller
 
-      - name: Build standalone app
+      - name: Build app
         run: |
-          pyinstaller --onefile --windowed renamer_gui.py
+          pyinstaller --onefile --windowed Renamer/GUI/renamer_gui.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
